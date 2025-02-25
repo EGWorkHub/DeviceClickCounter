@@ -41,7 +41,7 @@ export default function App() {
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
         {devices.map((device, index) => (
           <div key={index} className="device-card">
-            {/* Remove Button */}
+            {/* Remove Button on the Left */}
             <button
               onClick={() => handleRemoveClick(index)}
               className={`remove-btn ${confirmRemove === index ? "confirm" : ""}`}
@@ -51,7 +51,9 @@ export default function App() {
 
             <h2 className="font-semibold text-gray-700 text-lg">{device.name}</h2>
             <p className="text-xl font-bold mt-1">{device.count}</p>
-            <div className="flex gap-3 mt-3">
+
+            {/* Minus and Plus Buttons with Gap */}
+            <div className="flex gap-6 mt-3">
               <button onClick={() => updateCount(index, -1)} className="minus-btn">−</button>
               <button onClick={() => updateCount(index, 1)} className="plus-btn">+</button>
             </div>
