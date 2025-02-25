@@ -42,6 +42,18 @@ export default function App() {
       alert("Please enter a valid number greater than 0.");
     }
   };
+  const removeCustomValue = (index) => {
+    const deviceName = devices[index].name;
+    const userInput = prompt(`Enter a value to remove from ${deviceName}:`);
+    const valueToRemove = parseInt(userInput, 10);
+  
+    if (!isNaN(valueToRemove) && valueToRemove > 0) {
+      updateCount(index, -valueToRemove);
+    } else {
+      alert("Please enter a valid number greater than 0.");
+    }
+  };
+  
   
 
   const handleRemoveClick = (index) => {
@@ -55,8 +67,14 @@ export default function App() {
   };
 
   const submitCounts = () => {
-    setSubmittedData(devices);
+    const formattedData = devices.map(device => `${device.name}: ${device.count}`).join("\n");
+    const recipient = "eg.workhub@gmail.com";
+    const subject = encodeURIComponent("Device Click Counter Submission");
+    const body = encodeURIComponent(`Here is the submitted data:\n\n${formattedData}`);
+    
+    window.location.href = `mailto:${recipient}?subject=${subject}&body=${body}`;
   };
+  
 
   return (
     <main>
@@ -80,6 +98,10 @@ export default function App() {
               <button onClick={() => updateCount(index, -1)} className="minus-btn">−</button>
               <button onClick={() => updateCount(index, 1)} className="plus-btn">+</button>
             </div>
+
+            <button onClick={() => removeCustomValue(index)} className="delete-value-btn mt-3">
+              Del Value
+            </button>
 
             {/* Add Custom Value Button */}
             <button onClick={() => addCustomValue(index)} className="add-value-btn mt-3">

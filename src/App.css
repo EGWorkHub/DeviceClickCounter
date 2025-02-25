@@ -126,3 +126,18 @@ button {
 .add-value-btn:hover {
   background: #fb8c00;
 }
+
+
+/* Add Value Button */
+.delete-value-btn {
+  background: #ff6200;
+  color: white;
+  padding: 8px 12px;
+  border-radius: 8px;
+  font-weight: bold;
+  transition: 0.3s;
+}
+
+.delete-value-btn:hover {
+  background: #ff6200;
+}
