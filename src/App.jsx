@@ -1,11 +1,21 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import "./App.css";
 
 export default function App() {
-  const [devices, setDevices] = useState([{ name: "Laptop", count: 0 }]);
+  // Load data from localStorage or use default state
+  const [devices, setDevices] = useState(() => {
+    const savedDevices = localStorage.getItem("devices");
+    return savedDevices ? JSON.parse(savedDevices) : [{ name: "Laptop", count: 0 }];
+  });
+
   const [newDevice, setNewDevice] = useState("");
   const [confirmRemove, setConfirmRemove] = useState(null);
   const [submittedData, setSubmittedData] = useState(null);
+
+  // Save devices to localStorage whenever they change
+  useEffect(() => {
+    localStorage.setItem("devices", JSON.stringify(devices));
+  }, [devices]);
 
   const addDevice = () => {
     if (newDevice.trim() !== "") {
@@ -41,7 +51,7 @@ export default function App() {
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
         {devices.map((device, index) => (
           <div key={index} className="device-card">
-            {/* Remove Button on the Left */}
+            {/* Remove Button */}
             <button
               onClick={() => handleRemoveClick(index)}
               className={`remove-btn ${confirmRemove === index ? "confirm" : ""}`}
@@ -51,9 +61,7 @@ export default function App() {
 
             <h2 className="font-semibold text-gray-700 text-lg">{device.name}</h2>
             <p className="text-xl font-bold mt-1">{device.count}</p>
-
-            {/* Minus and Plus Buttons with Gap */}
-            <div className="flex gap-6 mt-3">
+            <div className="flex gap-3 mt-3">
               <button onClick={() => updateCount(index, -1)} className="minus-btn">−</button>
               <button onClick={() => updateCount(index, 1)} className="plus-btn">+</button>
             </div>
