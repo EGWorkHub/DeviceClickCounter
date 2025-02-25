@@ -69,11 +69,11 @@ button {
   font-weight: bold;
 }
 
-/* Remove Button (Aligned Left) */
+/* Remove Button */
 .remove-btn {
   position: absolute;
   top: 8px;
-  left: 8px; /* Move to the left */
+  left: 8px;
   background: #e53e3e;
   color: white;
   border-radius: 50%;
@@ -113,9 +113,16 @@ button {
   background: #5e35b1;
 }
 
-/* Spacing between Minus and Plus Buttons */
-.device-card .flex {
-  display: flex;
-  justify-content: center;
-  gap: 16px; /* Increased spacing */
+/* Add Value Button */
+.add-value-btn {
+  background: #ff9800;
+  color: white;
+  padding: 8px 12px;
+  border-radius: 8px;
+  font-weight: bold;
+  transition: 0.3s;
+}
+
+.add-value-btn:hover {
+  background: #fb8c00;
 }

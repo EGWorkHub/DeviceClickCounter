@@ -24,11 +24,25 @@ export default function App() {
     }
   };
 
+  // Update count with buttons or added value
   const updateCount = (index, delta) => {
     const updatedDevices = [...devices];
     updatedDevices[index].count = Math.max(0, updatedDevices[index].count + delta);
     setDevices(updatedDevices);
   };
+
+  const addCustomValue = (index) => {
+    const deviceName = devices[index].name;
+    const userInput = prompt(`Enter a value to add for ${deviceName}:`);
+    const valueToAdd = parseInt(userInput, 10);
+  
+    if (!isNaN(valueToAdd) && valueToAdd > 0) {
+      updateCount(index, valueToAdd);
+    } else {
+      alert("Please enter a valid number greater than 0.");
+    }
+  };
+  
 
   const handleRemoveClick = (index) => {
     if (confirmRemove === index) {
@@ -61,10 +75,16 @@ export default function App() {
 
             <h2 className="font-semibold text-gray-700 text-lg">{device.name}</h2>
             <p className="text-xl font-bold mt-1">{device.count}</p>
-            <div className="flex gap-3 mt-3">
+
+            <div className="mt-3" style={{display:"flex", gap: "10px", alignItems:"center", justifyContent:"center", paddingBottom:"10px"}}>
               <button onClick={() => updateCount(index, -1)} className="minus-btn">−</button>
               <button onClick={() => updateCount(index, 1)} className="plus-btn">+</button>
             </div>
+
+            {/* Add Custom Value Button */}
+            <button onClick={() => addCustomValue(index)} className="add-value-btn mt-3">
+              Add Value
+            </button>
           </div>
         ))}
       </div>
